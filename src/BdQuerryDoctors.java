@@ -169,25 +169,36 @@ class BdQuerryVisits {
             while (rs.next()) {
                 int visitId = rs.getInt(1);
                 String visitDoctor = rs.getString(2);
-                String visitPatient = rs.getString(3);
-                String visitSpecifical = rs.getString(4);
+                String spec = rs.getString(3);
+                String firstNamePatient = rs.getString(4);
                 String doctorsfirstName = rs.getString(5);
-//                String doc = rs.getString(5);
-                String temp = "3";
-                if (visitDoctor.equals(temp)) {
-                    System.out.println("BdQuerryDoctors::getAllVisitsTable(); -- visitId: " + visitId + " visitDoctor: " + visitDoctor +
-                            " visitPatient: " + visitPatient + " visitSpecifical: " + visitSpecifical + " doctorsfirstName: " + doctorsfirstName);
-//                Visits vis = new Visits();
-//                visits.add(vis);
-                }
+                System.out.println("BdQuerryDoctors::getAllVisitsTable(); -- Номер посещения: " + visitId + ", номер доктора: " + visitDoctor +
+                            ", Описание приема: " + spec + ", Фамилия пациента: " + firstNamePatient + ", Фамилия доктора: " + doctorsfirstName);
             }
         }
         return visits;
     }
 
-//        String querry = "select visitId, visitDoctor, visitPatient, visitSpecifical from Visits, Doctors where"+
-//                "Visits.visitDoctor=Doctors.firstName";
+    public static void addNewVisit(Connection connectTo) {
+        try (Statement statement = connectTo.createStatement()) {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Введите фамилию доктора который произвел осмотр : ");
+            String str2 = bufferedReader.readLine();
+            System.out.println("Введите имя отсматриваемого пациента : ");
+            String str3 = bufferedReader.readLine();
+            System.out.println("Введите описание приема : ");
+            String str4 = bufferedReader.readLine();
+            statement.executeUpdate("insert into Visits (firstNamePatient, lastNamePatient, ageOfPatient)" +
+                    " values ('" + str2 + "','" + str3 + "', " + str4 + ")");
+            System.out.println("BdQuerryDoctors.addNewVisit();:: -- " + str2 + " " + str3 + " " );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
+//    select Doctors.doctorId from Doctors where Doctors.firstName = 'Дрогон';
+//    select Patients.patientId from Patients where Patients.firstNamePatient = 'Уолсен';
 
 }

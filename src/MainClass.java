@@ -19,6 +19,7 @@ public class MainClass {
 //                BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(connentTo));
 //                BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTable(connentTo));
                 BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTableWithFirstAndLastName(connentTo));
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
