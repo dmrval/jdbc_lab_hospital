@@ -90,7 +90,7 @@ class BdQuerryPatients {
                 String fNamePat = rs.getString(2);
                 String lNamePat = rs.getString(3);
                 int agePat = rs.getInt(4);
-                System.out.println("BdQuerryDoctors::getAllpatiens(); -- dPac:" + dPat + " fNamePac:" + fNamePat + " lNamePac:" + lNamePat + " agePac:" + agePat);
+                System.out.println("BdQuerryDoctors::getAllpatiens(); -- dPac: " + dPat + " fNamePac: " + fNamePat + " lNamePac: " + lNamePat + " agePac: " + agePat);
                 Patients pat = new Patients(dPat, fNamePat, lNamePat, agePat);
                 patients.add(pat);
             }
@@ -103,6 +103,91 @@ class BdQuerryPatients {
             System.out.println(pat);
         }
     }
+
+    public static void addNewPatient(Connection connectTo) {
+        try (Statement statement = connectTo.createStatement()) {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Введите фамилию нового пациента : ");
+            String str2 = bufferedReader.readLine();
+            System.out.println("Введите имя нового пациента : ");
+            String str3 = bufferedReader.readLine();
+            System.out.println("Введите возвраст нового пациента(полных лет) : ");
+            String str4 = bufferedReader.readLine();
+            int intStr4 = Integer.parseInt(str4);
+            statement.executeUpdate("insert into Patients (firstNamePatient, lastNamePatient, ageOfPatient)" +
+                    " values ('" + str2 + "','" + str3 + "', " + str4 + ")");
+            System.out.println("BdQuerryDoctors.addNewDoctor();:: -- " + str2 + " " + str3 + " " + intStr4);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteOnePatient(Connection connectTo) {
+        try (Statement statement = connectTo.createStatement()) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Введите имя пациента который перестал платить: ");
+            String str = scanner.nextLine();
+            statement.executeUpdate("delete from Patients where firstNamePatient='" + str + "'");
+            System.out.println("BdQuerryDoctors::deleteOnePatient(); -- " + str);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class BdQuerryVisits {
+    public static List<Visits> getAllVisitsTable(Connection connectTo) throws SQLException {
+        ArrayList<Visits> visits = new ArrayList<>();
+        try (Statement statement = connectTo.createStatement()) {
+            ResultSet rs = statement.executeQuery("select visitId, visitDoctor, visitPatient, visitSpecifical from Visits");
+            while (rs.next()) {
+                int visitId = rs.getInt(1);
+                int visitDoctor = rs.getInt(2);
+                int visitPatient = rs.getInt(3);
+                String visitSpecifical = rs.getString(4);
+                System.out.println("BdQuerryDoctors::getAllVisitsTable(); -- visitId: " + visitId + " visitDoctor: " + visitDoctor +
+                        " visitPatient: " + visitPatient + " visitSpecifical: " + visitSpecifical);
+                Visits vis = new Visits(visitId, visitDoctor, visitPatient, visitSpecifical);
+                visits.add(vis);
+            }
+        }
+        return visits;
+    }
+
+    static void printAllVisitsTable(List<Visits> connectTo) {
+        for(Visits vit :connectTo) {
+            System.out.println(vit);
+        }
+    }
+
+    public static List<Visits> getAllVisitsTableWithFirstAndLastName(Connection connectTo) throws SQLException {
+        ArrayList<Visits> visits = new ArrayList<>();
+        try (Statement statement = connectTo.createStatement()) {
+            ResultSet rs = statement.executeQuery("select Visits.visitDoctor, Visits.visitPatient, Visits.visitSpecifical, Doctors.firstName, Patients.firstNamePatient from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on  Visits.visitPatient = Patients.patientId");
+            while (rs.next()) {
+                int visitId = rs.getInt(1);
+                String visitDoctor = rs.getString(2);
+                String visitPatient = rs.getString(3);
+                String visitSpecifical = rs.getString(4);
+                String doctorsfirstName = rs.getString(5);
+//                String doc = rs.getString(5);
+                String temp = "3";
+                if (visitDoctor.equals(temp)) {
+                    System.out.println("BdQuerryDoctors::getAllVisitsTable(); -- visitId: " + visitId + " visitDoctor: " + visitDoctor +
+                            " visitPatient: " + visitPatient + " visitSpecifical: " + visitSpecifical + " doctorsfirstName: " + doctorsfirstName);
+//                Visits vis = new Visits();
+//                visits.add(vis);
+                }
+            }
+        }
+        return visits;
+    }
+
+//        String querry = "select visitId, visitDoctor, visitPatient, visitSpecifical from Visits, Doctors where"+
+//                "Visits.visitDoctor=Doctors.firstName";
+
 
 
 }

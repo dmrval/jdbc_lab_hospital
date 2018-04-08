@@ -10,13 +10,20 @@ public class Visits {
     public Visits() {
     }
 
-    public Visits(int visitId, Date visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
+    public Visits(int visitDoctor, int visitPatient, String visitSpecifical, String doctorFName) {
+        this.visitDoctor = visitDoctor;
+        this.visitPatient = visitPatient;
+        Patients p = new Patients();
+    }
+
+    public Visits(int visitId, int visitDoctor, int visitPatient, String visitSpecifical) {
         this.visitId = visitId;
-        this.visitDate = visitDate;
         this.visitDoctor = visitDoctor;
         this.visitPatient = visitPatient;
         this.visitSpecifical = visitSpecifical;
     }
+
+
 
     public int getVisitId() {
         return visitId;

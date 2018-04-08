@@ -14,7 +14,11 @@ public class MainClass {
 //                BdQuerryDoctors.addNewDoctor(connentTo);
 //                BdQuerryDoctors.printDoctors(BdQuerryDoctors.getAlldoctors(connentTo));
 //                BdQuerryDoctors.deleteOneDoctor(connentTo);
-                BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(connentTo));
+//                BdQuerryPatients.addNewPatient(connentTo);
+//                BdQuerryPatients.deleteOnePatient(connentTo);
+//                BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(connentTo));
+//                BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTable(connentTo));
+                BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTableWithFirstAndLastName(connentTo));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

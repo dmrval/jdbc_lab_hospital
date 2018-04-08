@@ -7,6 +7,10 @@ public class Patients {
     public Patients() {
     }
 
+    public Patients(String firstNamePatient) {
+        this.firstNamePatient = firstNamePatient;
+    }
+
     public Patients(int id, String firstNamePatient, String lastNamePatient, int ageOfPatient) {
         this.patientId = id;
         this.firstNamePatient = firstNamePatient;
