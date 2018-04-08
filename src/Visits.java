@@ -13,8 +13,8 @@ public class Visits {
     public Visits(int visitId, Date visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
         this.visitId = visitId;
         this.visitDate = visitDate;
-        this.visitDoctor = Doctors.doctorId;
-        this.visitPatient = Patients.patientId;
+        this.visitDoctor = visitDoctor;
+        this.visitPatient = visitPatient;
         this.visitSpecifical = visitSpecifical;
     }
 

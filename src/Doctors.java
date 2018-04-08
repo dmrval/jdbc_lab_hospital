@@ -1,5 +1,5 @@
 public class Doctors {
-    static int doctorId;
+    private int doctorId;
     private String firstName;
     private String lastName;
     private String profession;
