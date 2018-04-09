@@ -13,7 +13,7 @@ public class MainClass {
 //                BdQuerryDoctors.deleteOneDoctor(connentTo);
 //                BdQuerryDoctors.addNewDoctor(connentTo);
 //                BdQuerryDoctors.printDocttors.getAlldoctors(connentTo));
-////                BdQuerryDoctors.deleteOneDoctor(connentTors(BdQuerryDoco);
+////              BdQuerryDoctors.deleteOneDoctor(connentTors(BdQuerryDoco);
 //                BdQuerryPatients.addNewPatient(connentTo);
 //                BdQuerryPatients.deleteOnePatient(connentTo);
 //                BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(connentTo));
@@ -21,14 +21,16 @@ public class MainClass {
 //                BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTableWithFirstAndLastName(connentTo));
 //                BdQuerryAdditionalQuerry.giveDoctorByFirstName(connentTo);
 //                BdQuerryAdditionalQuerry.givePatientByFirstName(connentTo);
-                BdQuerryVisits.giveVisitsByOneDoctor(connentTo);
 //                BdQuerryVisits.giveVisitsByOneDoctor(connentTo);
-//                    PritnUserMenu.mainMenu();
-//                    BdQuerryDoctors.editOneDoctor(connentTo);
+//                BdQuerryVisits.giveVisitsByOneDoctor(connentTo);
+//                PritnUserMenu.mainMenu();
+//                BdQuerryDoctors.editOneDoctor(connentTo);
 //                BdQuerryPatients.editOnePatient(connentTo);
 //                BdQuerryDoctors.addNewDoctor(connentTo);
-
 //                BdQuerryDoctors.editOneDoctor(connentTo);
+//                BdQuerryVisits.addNewVisit(connentTo);
+//                BdQuerryVisits.deleteOneVisit(connentTo);
+                BdQuerryVisits.editOneVisit(connentTo);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

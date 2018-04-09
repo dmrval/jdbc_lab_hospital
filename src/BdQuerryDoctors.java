@@ -44,7 +44,6 @@ public class BdQuerryDoctors {
 //        }
 //    }
 
-
     public static void addNewDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
 //            System.out.println("Введите уникальный номер доктора : ");
@@ -86,7 +85,6 @@ public class BdQuerryDoctors {
             e.printStackTrace();
         }
     }
-
 
     public static void deleteOneDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
@@ -158,7 +156,7 @@ class BdQuerryPatients {
             System.out.println("РЕДАКТИРОВАНИЕ ВОЗВРАСТА ");
             String newAge = bufferedReader.readLine();
             int tempAge = Integer.parseInt(newAge);
-            statement.executeUpdate("update Patients set firstNamePatient = '" + newFirstName + "',lastNamePatient = '" + newLastName + "',ageOfPatient  = "+
+            statement.executeUpdate("update Patients set firstNamePatient = '" + newFirstName + "',lastNamePatient = '" + newLastName + "',ageOfPatient  = " +
                     "'" + newAge + "' where firstNamePatient = '" + fNameForEdit + "'");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,7 +164,6 @@ class BdQuerryPatients {
             e.printStackTrace();
         }
     }
-
 
     public static void deleteOnePatient(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
@@ -191,16 +188,16 @@ class BdQuerryVisits {
                 int visitDoctor = rs.getInt(2);
                 int visitPatient = rs.getInt(3);
                 String visitSpecifical = rs.getString(4);
-                System.out.println("BdQuerryDoctors::getAllVisitsTable(); -- visitId: " + visitId + " visitDoctor: " + visitDoctor +
-                        " visitPatient: " + visitPatient + " visitSpecifical: " + visitSpecifical);
+                System.out.println("Номер визита: " + visitId + " Доктор: " + visitDoctor +
+                        " Пациент: " + visitPatient + " Описание: " + visitSpecifical);
                 Visits vis = new Visits(visitId, visitDoctor, visitPatient, visitSpecifical);
-                visits.add(vis);
+//                visits.add(vis);
             }
         }
         return visits;
     }
 
-    static void printAllVisitsTable(List<Visits> connectTo) {
+    public static void printAllVisitsTable(List<Visits> connectTo) {
         for (Visits vit : connectTo) {
             System.out.println(vit);
         }
@@ -262,7 +259,60 @@ class BdQuerryVisits {
     }
 
     public static void addNewVisit(Connection connectTo) {
+        try {
+            Statement statement = connectTo.createStatement();
+            System.out.println("ФАМИЛИЯ ДОКТОРА ОСМОТРЕВШИЙ ПАЦИЕНТА: ");
+            int visitDoctor_temp = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
+            System.out.println("ФАМИЛИЯ ОСМАТРИВАЕМОГО ПАЦИЕНТА: ");
+            int visitPatient_temp = BdQuerryAdditionalQuerry.givePatientByFirstName(connectTo);
+            System.out.println("ОПИСАНИЕ ВИЗИТА: ");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            String visitSpecifical = bufferedReader.readLine();
+            statement.executeUpdate("insert into Visits (visitDoctor, visitPatient, visitSpecifical) values " +
+                    "(" + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+
+    }
+
+    public static void deleteOneVisit(Connection connectTo) {
+        try (Statement statement = connectTo.createStatement()) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("ВВЕДИТЕ НОМЕР ВИЗИТА КОТОРЫЙ ХОТИТЕ УДАЛИТЬ ИЗ БАЗЫ: ");
+            int temp = scanner.nextInt();
+            statement.executeUpdate("delete from Visits where visitId='" + temp + "'");
+            System.out.println("BdQuerryDoctors::deleteOnePatient(); -- " + temp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editOneVisit(Connection connectTo) {
+        try {
+            Statement statement = connectTo.createStatement();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("ВВЕДИТЕ НОМЕР ВИЗИТА ДЛЯ РЕДАКТИРОВАНИЯ");
+            BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTable(connectTo));
+            String fNameForEdit = bufferedReader.readLine();
+            int visitId = Integer.parseInt(fNameForEdit);
+            System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ДОКТОРА КОТОРЫЙ ПРОИЗВЕЛ ОСМОТР");
+            int visitDoctor = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
+            System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ОСМАТРИВАЕМОГО ПАЦИЕНТА ");
+            int visitPatient = BdQuerryAdditionalQuerry.givePatientByFirstName(connectTo);
+            System.out.println("РЕДАКТИРОВАНИЕ ОПИСАНИЯ ВИЗИТА ");
+            String newAge = bufferedReader.readLine();
+            int tempAge = Integer.parseInt(newAge);
+            statement.executeUpdate("update Visits set visitDoctor = '" + visitDoctor + "',visitPatient = '" + visitPatient + "',visitSpecifical  = " +
+                    "'" + newAge + "' where visitId = '" + visitId + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -289,7 +339,7 @@ class BdQuerryAdditionalQuerry {
             ResultSet rs = statement.executeQuery("select Doctors.doctorId from Doctors where Doctors.firstName = '" + strTemp + "'");
             while (rs.next()) {
                 temp = rs.getInt(1);
-                System.out.println("BdQuerryAdditionalQuerry::giveDoctorByFirstName() -- " + temp);
+//                System.out.println("BdQuerryAdditionalQuerry::giveDoctorByFirstName() -- " + temp);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -318,5 +368,12 @@ class BdQuerryAdditionalQuerry {
         return temp;
     }
 
-
+//    public static String giveFirstNameDoctorById(Connection connectTo) {
+//        try {
+//            Statement statement = connectTo.createStatement();
+//            ResultSet rs = statement.executeQuery("select Doctors.firstName from Doctors where ")
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
