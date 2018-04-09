@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d533266a-763e-4611-9271-a660fb98be3c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Hospital.db" afterPath="$PROJECT_DIR$/Hospital.db" />
-      <change beforePath="$PROJECT_DIR$/src/BdQuerryDoctors.java" afterPath="$PROJECT_DIR$/src/BdQuerryDoctors.java" />
-      <change beforePath="$PROJECT_DIR$/src/MainClass.java" afterPath="$PROJECT_DIR$/src/MainClass.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,8 +51,8 @@
           <file leaf-file-name="BdQuerryDoctors.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/BdQuerryDoctors.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="358">
-                  <caret line="350" column="0" lean-forward="true" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
+                <state relative-caret-position="528">
+                  <caret line="377" column="7" lean-forward="true" selection-start-line="377" selection-start-column="7" selection-end-line="377" selection-end-column="7" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="method#getAlldoctors#0;class#BdQuerryDoctors#0" expanded="false" />
@@ -90,7 +87,7 @@
           <file leaf-file-name="BdQuerryDoctors.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/BdQuerryDoctors.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5661">
+                <state relative-caret-position="3315">
                   <caret line="342" column="13" lean-forward="true" selection-start-line="342" selection-start-column="13" selection-end-line="342" selection-end-column="13" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -513,11 +510,19 @@
       <option name="project" value="LOCAL" />
       <updated>1523213199749</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="9.04(last)">
+      <created>1523300202800</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1523300202800</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -532,7 +537,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1890625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1890625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -578,7 +583,8 @@
     <MESSAGE value="6.04(4 last)" />
     <MESSAGE value="8.04(1)" />
     <MESSAGE value="8.04(2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="8.04(2)" />
+    <MESSAGE value="9.04(last)" />
+    <option name="LAST_COMMIT_MESSAGE" value="9.04(last)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1043,8 +1049,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BdQuerryDoctors.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="350" column="0" lean-forward="true" selection-start-line="350" selection-start-column="0" selection-end-line="350" selection-end-column="0" />
+        <state relative-caret-position="528">
+          <caret line="377" column="7" lean-forward="true" selection-start-line="377" selection-start-column="7" selection-end-line="377" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getAlldoctors#0;class#BdQuerryDoctors#0" expanded="false" />
