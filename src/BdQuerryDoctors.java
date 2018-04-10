@@ -17,9 +17,9 @@ public class BdQuerryDoctors {
                 String fName = rs.getString(2);
                 String lName = rs.getString(3);
                 String prof = rs.getString(4);
-                System.out.println("BdQuerryDoctors::getAlldoctors(); -- d:" + d + " fName:" + fName + " lName:" + lName + " prof:" + prof);
+                System.out.println("НОМЕР: " + d + " ФАМИЛИЯ: " + fName + " ИМЯ: " + lName + " СПЕЦИАЛИЗАЦИЯ: " + prof);
                 Doctors doc = new Doctors(d, fName, lName, prof);
-                doctors.add(doc);
+//                doctors.add(doc);
             }
         }
         return doctors;
@@ -212,8 +212,8 @@ class BdQuerryVisits {
                 int visitId = rs.getInt(1);
                 String visitDoctor = rs.getString(2);
                 String spec = rs.getString(3);
-                String firstNamePatient = rs.getString(4);
-                String doctorsfirstName = rs.getString(5);
+                String doctorsfirstName = rs.getString(4);
+                String firstNamePatient = rs.getString(5);
                 System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor +
                         ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName);
             }
@@ -286,7 +286,7 @@ class BdQuerryVisits {
             System.out.println("ВВЕДИТЕ НОМЕР ВИЗИТА КОТОРЫЙ ХОТИТЕ УДАЛИТЬ ИЗ БАЗЫ: ");
             int temp = scanner.nextInt();
             statement.executeUpdate("delete from Visits where visitId='" + temp + "'");
-            System.out.println("BdQuerryDoctors::deleteOnePatient(); -- " + temp);
+            System.out.println("BdQuerryDoctors::deleteOneVisit(); -- " + temp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
