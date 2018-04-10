@@ -100,6 +100,7 @@ public class BdQuerryDoctors {
 }
 
 class BdQuerryPatients {
+
     public static List<Patients> getAllpatiens(Connection connectTo) throws SQLException {
         ArrayList<Patients> patients = new ArrayList<>();
         try (Statement statement = connectTo.createStatement()) {
@@ -109,9 +110,9 @@ class BdQuerryPatients {
                 String fNamePat = rs.getString(2);
                 String lNamePat = rs.getString(3);
                 int agePat = rs.getInt(4);
-                System.out.println("BdQuerryDoctors::getAllpatiens(); -- dPac: " + dPat + " fNamePac: " + fNamePat + " lNamePac: " + lNamePat + " agePac: " + agePat);
+                System.out.println("НОМЕР ПАЦИЕНТА: " + dPat + " ФАМИЛИЯ : " + fNamePat + " ИМЯ : " + lNamePat + " ВОЗВРАСТ: " + agePat);
                 Patients pat = new Patients(dPat, fNamePat, lNamePat, agePat);
-                patients.add(pat);
+//                patients.add(pat);
             }
         }
         return patients;
@@ -213,7 +214,7 @@ class BdQuerryVisits {
                 String spec = rs.getString(3);
                 String firstNamePatient = rs.getString(4);
                 String doctorsfirstName = rs.getString(5);
-                System.out.println("BdQuerryDoctors::getAllVisitsTable(); -- НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor +
+                System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor +
                         ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName);
             }
         }
@@ -368,12 +369,48 @@ class BdQuerryAdditionalQuerry {
         return temp;
     }
 
-//    public static String giveFirstNameDoctorById(Connection connectTo) {
-//        try {
-//            Statement statement = connectTo.createStatement();
-//            ResultSet rs = statement.executeQuery("select Doctors.firstName from Doctors where ")
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static String giveFirstNameDoctorById(Connection connectTo) {
+        String give = null;
+        try {
+            Statement statement = connectTo.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            int temp_id = scanner.nextInt();
+            ResultSet rs = statement.executeQuery("select Doctors.firstName from Doctors where Doctors.doctorId = "+ temp_id +"");
+            give = rs.getString(1);
+            System.out.println(give);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return give;
+    }
+
+    public static String giveFirstNamePatientById(Connection connectTo) {
+        String give = null;
+        try {
+            Statement statement = connectTo.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            int temp_id = scanner.nextInt();
+            ResultSet rs = statement.executeQuery("select Patients.firstNamePatient from Patients where Patients.patientId = "+ temp_id +"");
+            give = rs.getString(1);
+            System.out.println(give);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return give;
+    }
+
+    public static String giveFirstNamePatientByIdWithParametr(Connection connectTo, int id) {
+        String give = null;
+        try {
+            Statement statement = connectTo.createStatement();
+            ResultSet rs = statement.executeQuery("select Patients.firstNamePatient from Patients where Patients.patientId = "+ id +"");
+            give = rs.getString(1);
+            System.out.println(give);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return give;
+    }
+
+
 }
