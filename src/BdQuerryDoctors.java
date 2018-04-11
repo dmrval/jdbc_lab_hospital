@@ -3,8 +3,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class BdQuerryDoctors {
 
@@ -262,15 +265,32 @@ class BdQuerryVisits {
     public static void addNewVisit(Connection connectTo) {
         try {
             Statement statement = connectTo.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            PritnUserMenu.standartFormatDate();
+//            System.out.println("Укажите год приема: ");
+//            int year = scanner.nextInt();
+//            System.out.println("Укажите месяц: ");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//            String mon = bufferedReader.readLine();
+////            int k = Integer.parseInt(mon)
+//            int mounth_tmp = Times.nameMounth(mon);
+//            System.out.println("День приема: ");
+//            int dayOfMonth = scanner.nextInt();
+//            System.out.println("Укажите Час приема: ");
+//            int hourOfDay = scanner.nextInt();
+//            System.out.println("И минут: ");
+//            int minute = scanner.nextInt();
+//            int second = 0;
+//
+            Date date = Times.getDateForSql(1990,12,12);
             System.out.println("ФАМИЛИЯ ДОКТОРА ОСМОТРЕВШИЙ ПАЦИЕНТА: ");
             int visitDoctor_temp = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
             System.out.println("ФАМИЛИЯ ОСМАТРИВАЕМОГО ПАЦИЕНТА: ");
             int visitPatient_temp = BdQuerryAdditionalQuerry.givePatientByFirstName(connectTo);
             System.out.println("ОПИСАНИЕ ВИЗИТА: ");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             String visitSpecifical = bufferedReader.readLine();
-            statement.executeUpdate("insert into Visits (visitDoctor, visitPatient, visitSpecifical) values " +
-                    "(" + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
+            statement.executeUpdate("insert into Visits (visitDate, visitDoctor, visitPatient, visitSpecifical) values " +
+                    "(" + date + "," + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -375,7 +395,7 @@ class BdQuerryAdditionalQuerry {
             Statement statement = connectTo.createStatement();
             Scanner scanner = new Scanner(System.in);
             int temp_id = scanner.nextInt();
-            ResultSet rs = statement.executeQuery("select Doctors.firstName from Doctors where Doctors.doctorId = "+ temp_id +"");
+            ResultSet rs = statement.executeQuery("select Doctors.firstName from Doctors where Doctors.doctorId = " + temp_id + "");
             give = rs.getString(1);
             System.out.println(give);
         } catch (SQLException e) {
@@ -390,7 +410,7 @@ class BdQuerryAdditionalQuerry {
             Statement statement = connectTo.createStatement();
             Scanner scanner = new Scanner(System.in);
             int temp_id = scanner.nextInt();
-            ResultSet rs = statement.executeQuery("select Patients.firstNamePatient from Patients where Patients.patientId = "+ temp_id +"");
+            ResultSet rs = statement.executeQuery("select Patients.firstNamePatient from Patients where Patients.patientId = " + temp_id + "");
             give = rs.getString(1);
             System.out.println(give);
         } catch (SQLException e) {
@@ -403,7 +423,7 @@ class BdQuerryAdditionalQuerry {
         String give = null;
         try {
             Statement statement = connectTo.createStatement();
-            ResultSet rs = statement.executeQuery("select Patients.firstNamePatient from Patients where Patients.patientId = "+ id +"");
+            ResultSet rs = statement.executeQuery("select Patients.firstNamePatient from Patients where Patients.patientId = " + id + "");
             give = rs.getString(1);
             System.out.println(give);
         } catch (SQLException e) {
@@ -412,5 +432,53 @@ class BdQuerryAdditionalQuerry {
         return give;
     }
 
+}
 
+class Times {
+//    public static String gregCalendar(int year, int month, int dayOfMonth, int hourOfDay, int minute, int second) {
+////        GregorianCalendar gregorianCalendar = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute, second);
+//        java.sql.Date = gregorianCalendar.getTime();
+//        String dateString = date.toString();
+//        dateString= dateString.replace(" ", "-");
+//        dateString= dateString.replace(":", "|");
+//        System.out.println(dateString);
+//        return dateString;
+//    }
+
+    public static Date getDateForSql (int year, int month, int dayOfMonth) {
+        java.sql.Date date = new java.sql.Date(year,month,dayOfMonth);
+        System.out.println(date);
+        return date;
+    }
+
+    public static int nameMounth(String mounth) {
+        switch (mounth) {
+            case "Январь":
+                return 0;
+            case "Февраль":
+                return 1;
+            case "Март":
+                return 2;
+            case "Апрель":
+                return 3;
+            case "Май":
+                return 4;
+            case "Июнь":
+                return 5;
+            case "Июль":
+                return 6;
+            case "Август":
+                return 7;
+            case "Сентябрь":
+                return 8;
+            case "Октябрь":
+                return 9;
+            case "Ноябрь":
+                return 10;
+            case "Декабрь":
+                return 11;
+
+        }
+        return 0;
+    }
 }

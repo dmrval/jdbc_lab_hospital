@@ -1,8 +1,9 @@
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Visits {
     private int visitId;
-    private Date visitDate;
+    private GregorianCalendar visitDate;
     private int visitDoctor;
     private int visitPatient;
     private String visitSpecifical;
@@ -23,7 +24,13 @@ public class Visits {
         this.visitSpecifical = visitSpecifical;
     }
 
-
+    public Visits(int visitId, GregorianCalendar visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
+        this.visitId = visitId;
+        this.visitDate = visitDate;
+        this.visitDoctor = visitDoctor;
+        this.visitPatient = visitPatient;
+        this.visitSpecifical = visitSpecifical;
+    }
 
     public int getVisitId() {
         return visitId;
@@ -33,11 +40,11 @@ public class Visits {
         this.visitId = visitId;
     }
 
-    public Date getVisitDate() {
+    public GregorianCalendar getVisitDate() {
         return visitDate;
     }
 
-    public void setVisitDate(Date visitDate) {
+    public void setVisitDate(GregorianCalendar visitDate) {
         this.visitDate = visitDate;
     }
 

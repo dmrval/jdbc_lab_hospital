@@ -49,4 +49,15 @@ public class PritnUserMenu {
         stringBuilder.append("4 - Вернуться назад в главное меню\n");
         System.out.println(stringBuilder);
     }
+
+    static void standartFormatDate() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Дата и время проведения осмотра в формате \n");
+        stringBuilder.append("1 - Год (Пример ГГГГ)\n");
+        stringBuilder.append("2 - Месяц (Пример Январь)\n");
+        stringBuilder.append("3 - День (Пример ДД)\n");
+        stringBuilder.append("4 - Час посещения (Пример 21)\n");
+        stringBuilder.append("5 - Минуты (Пример 45)\n");
+        System.out.println(stringBuilder);
+    }
 }
