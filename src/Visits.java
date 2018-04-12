@@ -3,7 +3,7 @@ import java.util.GregorianCalendar;
 
 public class Visits {
     private int visitId;
-    private GregorianCalendar visitDate;
+    private Date visitDate;
     private int visitDoctor;
     private int visitPatient;
     private String visitSpecifical;
@@ -24,7 +24,7 @@ public class Visits {
         this.visitSpecifical = visitSpecifical;
     }
 
-    public Visits(int visitId, GregorianCalendar visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
+    public Visits(int visitId, Date visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
         this.visitId = visitId;
         this.visitDate = visitDate;
         this.visitDoctor = visitDoctor;
@@ -40,11 +40,11 @@ public class Visits {
         this.visitId = visitId;
     }
 
-    public GregorianCalendar getVisitDate() {
+    public Date getVisitDate() {
         return visitDate;
     }
 
-    public void setVisitDate(GregorianCalendar visitDate) {
+    public void setVisitDate(Date visitDate) {
         this.visitDate = visitDate;
     }
 

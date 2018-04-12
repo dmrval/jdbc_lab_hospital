@@ -210,15 +210,16 @@ class BdQuerryVisits {
     public static List<Visits> getAllVisitsTableWithFirstAndLastName(Connection connectTo) throws SQLException {
         ArrayList<Visits> visits = new ArrayList<>();
         try (Statement statement = connectTo.createStatement()) {
-            ResultSet rs = statement.executeQuery("select Visits.visitDoctor, Visits.visitPatient, Visits.visitSpecifical, Doctors.firstName, Patients.firstNamePatient from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on  Visits.visitPatient = Patients.patientId");
+            ResultSet rs = statement.executeQuery("select Visits.visitDoctor, Visits.visitPatient, Visits.visitSpecifical, Doctors.firstName, Patients.firstNamePatient, Visits.visitDate from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on  Visits.visitPatient = Patients.patientId");
             while (rs.next()) {
                 int visitId = rs.getInt(1);
                 String visitDoctor = rs.getString(2);
                 String spec = rs.getString(3);
                 String doctorsfirstName = rs.getString(4);
                 String firstNamePatient = rs.getString(5);
+                String dbSqlDate = rs.getString(6);
                 System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor +
-                        ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName);
+                        ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName + ", ДАТА ПРИЕМА: " + dbSqlDate);
             }
         }
         return visits;
@@ -267,22 +268,18 @@ class BdQuerryVisits {
             Statement statement = connectTo.createStatement();
             Scanner scanner = new Scanner(System.in);
             PritnUserMenu.standartFormatDate();
-//            System.out.println("Укажите год приема: ");
-//            int year = scanner.nextInt();
-//            System.out.println("Укажите месяц: ");
+            System.out.println("Укажите год приема: ");
+            int year = scanner.nextInt();
+            System.out.println("Укажите месяц: ");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//            String mon = bufferedReader.readLine();
-////            int k = Integer.parseInt(mon)
-//            int mounth_tmp = Times.nameMounth(mon);
-//            System.out.println("День приема: ");
-//            int dayOfMonth = scanner.nextInt();
-//            System.out.println("Укажите Час приема: ");
-//            int hourOfDay = scanner.nextInt();
-//            System.out.println("И минут: ");
-//            int minute = scanner.nextInt();
-//            int second = 0;
-//
-            Date date = Times.getDateForSql(1990,12,12);
+            String scan = bufferedReader.readLine();
+            int mounth_tmp = scanner.nextInt();
+//                    Times.nameMounth(scan);
+//            String mes = bufferedReader.readLine();
+            System.out.println("День приема: ");
+            int dayOfMonth = scanner.nextInt();
+            String dateString = year + "-" + mounth_tmp + "-" + dayOfMonth;
+            System.out.println(dateString);
             System.out.println("ФАМИЛИЯ ДОКТОРА ОСМОТРЕВШИЙ ПАЦИЕНТА: ");
             int visitDoctor_temp = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
             System.out.println("ФАМИЛИЯ ОСМАТРИВАЕМОГО ПАЦИЕНТА: ");
@@ -290,7 +287,7 @@ class BdQuerryVisits {
             System.out.println("ОПИСАНИЕ ВИЗИТА: ");
             String visitSpecifical = bufferedReader.readLine();
             statement.executeUpdate("insert into Visits (visitDate, visitDoctor, visitPatient, visitSpecifical) values " +
-                    "(" + date + "," + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
+                    "(" + dateString + "," + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -445,8 +442,8 @@ class Times {
 //        return dateString;
 //    }
 
-    public static Date getDateForSql (int year, int month, int dayOfMonth) {
-        java.sql.Date date = new java.sql.Date(year,month,dayOfMonth);
+    public static Date getDateForSql(int year, int month, int dayOfMonth) {
+        java.sql.Date date = new java.sql.Date(year, month, dayOfMonth);
         System.out.println(date);
         return date;
     }
@@ -477,8 +474,7 @@ class Times {
                 return 10;
             case "Декабрь":
                 return 11;
-
         }
-        return 0;
+        return 10;
     }
 }

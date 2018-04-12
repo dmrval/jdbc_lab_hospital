@@ -11,8 +11,9 @@ public class MainClass {
         try {
             Class.forName("org.sqlite.JDBC");
 //            SwithMenu.sWMain();
-//            BdQuerryVisits.addNewVisit(Connections.connectTo());
-            Times.getDateForSql(18,2,12);
+            java.sql.Date sqlDate = new java.sql.Date(2012,11,12);
+//            System.out.println(sqlDate.getYear()+"-"+);
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
