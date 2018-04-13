@@ -1,17 +1,19 @@
-public class Patients {
+package mainPackage;
+
+public class Patient {
     private int patientId;
     private String firstNamePatient;
     private String lastNamePatient;
     private int ageOfPatient;
 
-    public Patients() {
+    public Patient() {
     }
 
-    public Patients(String firstNamePatient) {
+    public Patient(String firstNamePatient) {
         this.firstNamePatient = firstNamePatient;
     }
 
-    public Patients(int id, String firstNamePatient, String lastNamePatient, int ageOfPatient) {
+    public Patient(int id, String firstNamePatient, String lastNamePatient, int ageOfPatient) {
         this.patientId = id;
         this.firstNamePatient = firstNamePatient;
         this.lastNamePatient = lastNamePatient;
@@ -52,7 +54,7 @@ public class Patients {
 
     @Override
     public String toString() {
-        return "Patients{" +
+        return "mainPackage.Patient{" +
                 "patientId=" + patientId +
                 ", firstNamePatient='" + firstNamePatient + '\'' +
                 ", lastNamePatient='" + lastNamePatient + '\'' +

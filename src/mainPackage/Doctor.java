@@ -1,13 +1,15 @@
-public class Doctors {
+package mainPackage;
+
+public class Doctor {
     private int doctorId;
     private String firstName;
     private String lastName;
     private String profession;
 
-    public Doctors() {
+    public Doctor() {
     }
 
-    public Doctors(int id, String firstName, String lastName, String profession) {
+    public Doctor(int id, String firstName, String lastName, String profession) {
         this.doctorId = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,7 +50,7 @@ public class Doctors {
 
     @Override
     public String toString() {
-        return "Doctors{" +
+        return "mainPackage.Doctor{" +
                 "doctorId=" + doctorId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

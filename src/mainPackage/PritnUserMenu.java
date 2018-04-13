@@ -1,5 +1,7 @@
+package mainPackage;
+
 public class PritnUserMenu {
-    static void mainMenu() {
+    public static void mainMenu() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Главное меню: \n");
         stringBuilder.append("1 - Получить информацию из базы\n");
@@ -10,7 +12,7 @@ public class PritnUserMenu {
         System.out.println(stringBuilder);
     }
 
-    static void menu_1() {
+    public static void menu_1() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("По какой базе получить инфо: \n");
         stringBuilder.append("1 - Пациентов\n");
@@ -20,7 +22,7 @@ public class PritnUserMenu {
         System.out.println(stringBuilder);
     }
 
-    static void menu_2() {
+    public static void menu_2() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Какую информацию добавить: \n");
         stringBuilder.append("1 - Пациентов\n");
@@ -30,7 +32,7 @@ public class PritnUserMenu {
         System.out.println(stringBuilder);
     }
 
-    static void menu_3() {
+    public static void menu_3() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Какую информацию удалить: \n");
         stringBuilder.append("1 - Пациентов\n");
@@ -40,7 +42,7 @@ public class PritnUserMenu {
         System.out.println(stringBuilder);
     }
 
-    static void menu_4() {
+    public static void menu_4() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Какую информацию модифицировать: \n");
         stringBuilder.append("1 - Пациентов\n");
@@ -50,7 +52,7 @@ public class PritnUserMenu {
         System.out.println(stringBuilder);
     }
 
-    static void standartFormatDate() {
+    public static void standartFormatDate() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Дата и время проведения осмотра в формате \n");
         stringBuilder.append("1 - Год (Пример ГГГГ)\n");

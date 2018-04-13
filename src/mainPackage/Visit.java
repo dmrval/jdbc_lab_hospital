@@ -1,30 +1,31 @@
-import java.util.Date;
-import java.util.GregorianCalendar;
+package mainPackage;
 
-public class Visits {
+import java.util.Date;
+
+public class Visit {
     private int visitId;
     private Date visitDate;
     private int visitDoctor;
     private int visitPatient;
     private String visitSpecifical;
 
-    public Visits() {
+    public Visit() {
     }
 
-    public Visits(int visitDoctor, int visitPatient, String visitSpecifical, String doctorFName) {
+    public Visit(int visitDoctor, int visitPatient, String visitSpecifical, String doctorFName) {
         this.visitDoctor = visitDoctor;
         this.visitPatient = visitPatient;
-        Patients p = new Patients();
+        Patient p = new Patient();
     }
 
-    public Visits(int visitId, int visitDoctor, int visitPatient, String visitSpecifical) {
+    public Visit(int visitId, int visitDoctor, int visitPatient, String visitSpecifical) {
         this.visitId = visitId;
         this.visitDoctor = visitDoctor;
         this.visitPatient = visitPatient;
         this.visitSpecifical = visitSpecifical;
     }
 
-    public Visits(int visitId, Date visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
+    public Visit(int visitId, Date visitDate, int visitDoctor, int visitPatient, String visitSpecifical) {
         this.visitId = visitId;
         this.visitDate = visitDate;
         this.visitDoctor = visitDoctor;
@@ -74,7 +75,7 @@ public class Visits {
 
     @Override
     public String toString() {
-        return "Visits{" +
+        return "mainPackage.Visit{" +
                 "visitId=" + visitId +
                 ", visitDate=" + visitDate +
                 ", visitDoctor=" + visitDoctor +
