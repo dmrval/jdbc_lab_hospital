@@ -1,10 +1,11 @@
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SwithMenu {
 
-    public static void sWMain() throws SQLException {
+    public static void sWMain() throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
         PritnUserMenu.mainMenu();
         int i = scanner.nextInt();
@@ -22,11 +23,12 @@ public class SwithMenu {
                 sW_Menu_4();
                 break;
             case 5:
+                System.exit(0);
                 break;
         }
     }
 
-    public static void sW_Menu_1() throws SQLException {
+    public static void sW_Menu_1() throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
         PritnUserMenu.menu_1();
         int i = scanner.nextInt();
@@ -48,7 +50,7 @@ public class SwithMenu {
         }
     }
 
-    public static void sW_Menu_2() throws SQLException {
+    public static void sW_Menu_2() throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
         PritnUserMenu.menu_2();
         int i = scanner.nextInt();
@@ -70,7 +72,7 @@ public class SwithMenu {
         }
     }
 
-    public static void sW_Menu_3() throws SQLException {
+    public static void sW_Menu_3() throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
         PritnUserMenu.menu_3();
         int i = scanner.nextInt();
@@ -92,7 +94,7 @@ public class SwithMenu {
         }
     }
 
-    public static void sW_Menu_4() throws SQLException {
+    public static void sW_Menu_4() throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
         PritnUserMenu.menu_4();
         int i = scanner.nextInt();
