@@ -49,10 +49,7 @@ public class BdQuerryDoctors {
 
     public static void addNewDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
-//            System.out.println("Введите уникальный номер доктора : ");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//            String cx = bufferedReader.readLine();
-//            int str1 = Integer.parseInt(cx);
             System.out.println("ВВЕДИТЕ ФАМИЛИЮ НОВОГО ДОКТОРА : ");
             String str2 = bufferedReader.readLine();
             System.out.println("ВВЕДИТЕ ИМЯ НОВОГО ДОКТОРА : ");
@@ -73,6 +70,7 @@ public class BdQuerryDoctors {
         try {
             Statement statement = connetTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            BdQuerryDoctors.printDoctors(BdQuerryDoctors.getAlldoctors(Connections.connectTo()));
             System.out.println("ВВЕДИТЕ ФАМИЛИЮ ДОКТОРА НА ИЗМЕНЕНИЕ ДАННЫХ");
             String fNameForEdit = bufferedReader.readLine();
             System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ");
@@ -92,6 +90,7 @@ public class BdQuerryDoctors {
     public static void deleteOneDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
             Scanner scanner = new Scanner(System.in);
+            BdQuerryDoctors.printDoctors(BdQuerryDoctors.getAlldoctors(Connections.connectTo()));
             System.out.println("ВВЕДИТЕ ФАМИЛИЮ ДОКТОРА КОТОРОГО УДАЛИТЬ ИЗ БАЗЫ: ");
             String str = scanner.nextLine();
             statement.executeUpdate("delete from Doctors where firstName='" + str + "'");
@@ -115,7 +114,6 @@ class BdQuerryPatients {
                 int agePat = rs.getInt(4);
                 System.out.println("НОМЕР ПАЦИЕНТА: " + dPat + " ФАМИЛИЯ : " + fNamePat + " ИМЯ : " + lNamePat + " ВОЗВРАСТ: " + agePat);
                 Patients pat = new Patients(dPat, fNamePat, lNamePat, agePat);
-//                patients.add(pat);
             }
         }
         return patients;
@@ -151,6 +149,7 @@ class BdQuerryPatients {
         try {
             Statement statement = connetTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(Connections.connectTo()));
             System.out.println("ВВЕДИТЕ ФАМИЛИЮ ПАЦИЕНТА НА ИЗМЕНЕНИЕ ДАННЫХ");
             String fNameForEdit = bufferedReader.readLine();
             System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ");
@@ -172,7 +171,8 @@ class BdQuerryPatients {
     public static void deleteOnePatient(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("ВВЕДИТЕ ИМЯ ПАЦИЕНТА КОТОРЫЙ ПЕРЕСТАЛ ПЛАТИТЬ: ");
+            BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(Connections.connectTo()));
+            System.out.println("ВВЕДИТЕ ФАМИЛИЮ ПАЦИЕНТА КОТОРЫЙ ПЕРЕСТАЛ ПЛАТИТЬ: ");
             String str = scanner.nextLine();
             statement.executeUpdate("delete from Patients where firstNamePatient='" + str + "'");
             System.out.println("BdQuerryDoctors::deleteOnePatient(); -- " + str);
@@ -195,7 +195,6 @@ class BdQuerryVisits {
                 System.out.println("Номер визита: " + visitId + " Доктор: " + visitDoctor +
                         " Пациент: " + visitPatient + " Описание: " + visitSpecifical);
                 Visits vis = new Visits(visitId, visitDoctor, visitPatient, visitSpecifical);
-//                visits.add(vis);
             }
         }
         return visits;
@@ -210,16 +209,17 @@ class BdQuerryVisits {
     public static List<Visits> getAllVisitsTableWithFirstAndLastName(Connection connectTo) throws SQLException {
         ArrayList<Visits> visits = new ArrayList<>();
         try (Statement statement = connectTo.createStatement()) {
-            ResultSet rs = statement.executeQuery("select Visits.visitDoctor, Visits.visitPatient, Visits.visitSpecifical, Doctors.firstName, Patients.firstNamePatient, Visits.visitDate from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on  Visits.visitPatient = Patients.patientId");
+            ResultSet rs = statement.executeQuery("select Visits.visitId, Visits.visitDoctor, Visits.visitPatient, Visits.visitSpecifical, Doctors.firstName, Patients.firstNamePatient, Visits.visitDate from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on  Visits.visitPatient = Patients.patientId");
             while (rs.next()) {
                 int visitId = rs.getInt(1);
                 String visitDoctor = rs.getString(2);
-                String spec = rs.getString(3);
-                String doctorsfirstName = rs.getString(4);
-                String firstNamePatient = rs.getString(5);
-                String dbSqlDate = rs.getString(6);
+                String visitPatient = rs.getString(3);
+                String spec = rs.getString(4);
+                String doctorsfirstName = rs.getString(5);
+                String firstNamePatient = rs.getString(6);
+                String dbSqlDate = rs.getString(7);
 //                Date dt = rs.getDate(6);
-                System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor +
+                System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor + " НОМЕР ПАЦИЕНТА: " + visitPatient +
                         ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName + ", ДАТА ПРИЕМА: " + dbSqlDate);
             }
         }
@@ -228,7 +228,6 @@ class BdQuerryVisits {
 
     public static void giveVisitsByOneDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("ВВЕДИТЕ ФАМИЛИЮ ДОКТОРА У КОТОРОГО ХОТИТЕ УЗНАТЬ ИНФОРМАЦИЮ О ПЕСЕЩЕНИЯХ : ");
             int id_doc = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
             System.out.println(id_doc);
@@ -282,10 +281,11 @@ class BdQuerryVisits {
             System.out.println("Минуты: ");
             int minuteVisit = scanner.nextInt();
             Date dateString = new Date(year, mounth_tmp, dayOfMonth, hourVisit, minuteVisit);
-//            String dateString = year + "-" + mounth_tmp + "-" + dayOfMonth;
             System.out.println(dateString);
+            BdQuerryDoctors.printDoctors(BdQuerryDoctors.getAlldoctors(Connections.connectTo()));
             System.out.println("ФАМИЛИЯ ДОКТОРА ОСМОТРЕВШИЙ ПАЦИЕНТА: ");
             int visitDoctor_temp = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
+            BdQuerryPatients.printPatients(BdQuerryPatients.getAllpatiens(Connections.connectTo()));
             System.out.println("ФАМИЛИЯ ОСМАТРИВАЕМОГО ПАЦИЕНТА: ");
             int visitPatient_temp = BdQuerryAdditionalQuerry.givePatientByFirstName(connectTo);
             System.out.println("ОПИСАНИЕ ВИЗИТА: ");
@@ -304,6 +304,7 @@ class BdQuerryVisits {
     public static void deleteOneVisit(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
             Scanner scanner = new Scanner(System.in);
+            BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTableWithFirstAndLastName(Connections.connectTo()));
             System.out.println("ВВЕДИТЕ НОМЕР ВИЗИТА КОТОРЫЙ ХОТИТЕ УДАЛИТЬ ИЗ БАЗЫ: ");
             int temp = scanner.nextInt();
             statement.executeUpdate("delete from Visits where visitId='" + temp + "'");
@@ -317,6 +318,7 @@ class BdQuerryVisits {
         try {
             Statement statement = connectTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTableWithFirstAndLastName(Connections.connectTo()));
             System.out.println("ВВЕДИТЕ НОМЕР ВИЗИТА ДЛЯ РЕДАКТИРОВАНИЯ");
             BdQuerryVisits.printAllVisitsTable(BdQuerryVisits.getAllVisitsTable(connectTo));
             String fNameForEdit = bufferedReader.readLine();
@@ -361,7 +363,6 @@ class BdQuerryAdditionalQuerry {
             ResultSet rs = statement.executeQuery("select Doctors.doctorId from Doctors where Doctors.firstName = '" + strTemp + "'");
             while (rs.next()) {
                 temp = rs.getInt(1);
-//                System.out.println("BdQuerryAdditionalQuerry::giveDoctorByFirstName() -- " + temp);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -380,7 +381,6 @@ class BdQuerryAdditionalQuerry {
             ResultSet rs = statement.executeQuery("select Patients.patientId from Patients where Patients.firstNamePatient = '" + strTemp + "'");
             while (rs.next()) {
                 temp = rs.getInt(1);
-//                System.out.println("BdQuerryAdditionalQuerry::givePatientByFirstName() -- " + temp);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -436,15 +436,6 @@ class BdQuerryAdditionalQuerry {
 }
 
 class Times {
-//    public static String gregCalendar(int year, int month, int dayOfMonth, int hourOfDay, int minute, int second) {
-////        GregorianCalendar gregorianCalendar = new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute, second);
-//        java.sql.Date = gregorianCalendar.getTime();
-//        String dateString = date.toString();
-//        dateString= dateString.replace(" ", "-");
-//        dateString= dateString.replace(":", "|");
-//        System.out.println(dateString);
-//        return dateString;
-//    }
 
     public static Date getDateForSql(int year, int month, int dayOfMonth) {
         java.sql.Date date = new java.sql.Date(year, month, dayOfMonth);

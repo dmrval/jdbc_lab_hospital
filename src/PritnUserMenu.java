@@ -5,8 +5,8 @@ public class PritnUserMenu {
         stringBuilder.append("1 - Получить информацию из базы\n");
         stringBuilder.append("2 - Добавить информацию в базу\n");
         stringBuilder.append("3 - Удалить информацию из базы\n");
-        stringBuilder.append("4 - Изменить информацию из базы\n");
-        stringBuilder.append("5 - Модификация информации в базе\n");
+        stringBuilder.append("4 - Изменить информацию в базы\n");
+        stringBuilder.append("5 - Выход\n");
         System.out.println(stringBuilder);
     }
 
