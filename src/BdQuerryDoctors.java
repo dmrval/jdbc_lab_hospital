@@ -218,6 +218,7 @@ class BdQuerryVisits {
                 String doctorsfirstName = rs.getString(4);
                 String firstNamePatient = rs.getString(5);
                 String dbSqlDate = rs.getString(6);
+//                Date dt = rs.getDate(6);
                 System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor +
                         ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName + ", ДАТА ПРИЕМА: " + dbSqlDate);
             }
@@ -273,12 +274,15 @@ class BdQuerryVisits {
             System.out.println("Укажите месяц: ");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             String scan = bufferedReader.readLine();
-            int mounth_tmp = scanner.nextInt();
-//                    Times.nameMounth(scan);
-//            String mes = bufferedReader.readLine();
+            int mounth_tmp = Times.nameMounth(scan);
             System.out.println("День приема: ");
             int dayOfMonth = scanner.nextInt();
-            String dateString = year + "-" + mounth_tmp + "-" + dayOfMonth;
+            System.out.println("Час приема: ");
+            int hourVisit = scanner.nextInt();
+            System.out.println("Минуты: ");
+            int minuteVisit = scanner.nextInt();
+            Date dateString = new Date(year, mounth_tmp, dayOfMonth, hourVisit, minuteVisit);
+//            String dateString = year + "-" + mounth_tmp + "-" + dayOfMonth;
             System.out.println(dateString);
             System.out.println("ФАМИЛИЯ ДОКТОРА ОСМОТРЕВШИЙ ПАЦИЕНТА: ");
             int visitDoctor_temp = BdQuerryAdditionalQuerry.giveDoctorByFirstName(connectTo);
@@ -287,7 +291,7 @@ class BdQuerryVisits {
             System.out.println("ОПИСАНИЕ ВИЗИТА: ");
             String visitSpecifical = bufferedReader.readLine();
             statement.executeUpdate("insert into Visits (visitDate, visitDoctor, visitPatient, visitSpecifical) values " +
-                    "(" + dateString + "," + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
+                    "('" + dateString + "'," + visitDoctor_temp + "," + visitPatient_temp + ",'" + visitSpecifical + "')");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {

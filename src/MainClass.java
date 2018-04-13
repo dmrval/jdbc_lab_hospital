@@ -10,10 +10,7 @@ public class MainClass {
     public static void main(String[] args) throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
-//            SwithMenu.sWMain();
-            java.sql.Date sqlDate = new java.sql.Date(2012,11,12);
-//            System.out.println(sqlDate.getYear()+"-"+);
-
+            SwithMenu.sWMain();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
