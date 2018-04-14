@@ -60,7 +60,7 @@ public class DBQueryPatients {
                 SwithMenu.sW_Menu_2();
             }
             int intStr4 = Integer.parseInt(str4);
-            statement.executeUpdate("insert into mainPackage.Patient (firstNamePatient, lastNamePatient, ageOfPatient)" +
+            statement.executeUpdate("insert into Patients (firstNamePatient, lastNamePatient, ageOfPatient)" +
                     " values ('" + str2 + "','" + str3 + "', " + str4 + ")");
             System.out.println("mainPackage.dbQuerys.DBQueryDoctors.addNewDoctor();:: -- " + str2 + " " + str3 + " " + intStr4);
         } catch (SQLException e) {
@@ -97,8 +97,8 @@ public class DBQueryPatients {
                 SwithMenu.sW_Menu_4();
             }
             int tempAge = Integer.parseInt(newAge);
-            statement.executeUpdate("update mainPackage.Patient set firstNamePatient = '" + newFirstName + "',lastNamePatient = '" + newLastName + "',ageOfPatient  = " +
-                    "'" + tempAge + "' where firstNСидорчукamePatient = '" + fNameForEdit + "'");
+            statement.executeUpdate("update Patients set firstNamePatient = '" + newFirstName + "',lastNamePatient = '" + newLastName + "',ageOfPatient  = " +
+                    "'" + tempAge + "' where firstNamePatient = '" + fNameForEdit + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -116,7 +116,7 @@ public class DBQueryPatients {
             if (str.equals("Отмена")) {
                 SwithMenu.sW_Menu_3();
             }
-            statement.executeUpdate("delete from mainPackage.Patient where firstNamePatient='" + str + "'");
+            statement.executeUpdate("delete from Patients where firstNamePatient='" + str + "'");
             System.out.println("mainPackage.dbQuerys.DBQueryDoctors::deleteOnePatient(); -- " + str);
         } catch (SQLException e) {
             e.printStackTrace();

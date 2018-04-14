@@ -72,7 +72,7 @@ public class DBQueryDoctors {
             if (str4.equals("Отмена")) {
                 SwithMenu.sW_Menu_2();
             }
-            statement.executeUpdate("insert into Doctor (firstName, lastName, profession)" +
+            statement.executeUpdate("insert into Doctors (firstName, lastName, profession)" +
                     " values ('" + str2 + "','" + str3 + "', '" + str4 + "')");
             System.out.println("DBQueryDoctors.addNewDoctor(); -- " + str2 + " " + str3 + " " + str4);
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class DBQueryDoctors {
             if (newSpecilization.equals("Отмена")) {
                 SwithMenu.sW_Menu_4();
             }
-            statement.executeUpdate("update mainPackage.Doctor set firstName = '" + newFirstName + "',lastName = '" + newLastName + "',profession  = '" + newSpecilization + "' where firstName = '" + fNameForEdit + "'");
+            statement.executeUpdate("update Doctors set firstName = '" + newFirstName + "',lastName = '" + newLastName + "',profession  = '" + newSpecilization + "' where firstName = '" + fNameForEdit + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -126,7 +126,7 @@ public class DBQueryDoctors {
             if (str.equals("Отмена")) {
                 SwithMenu.sW_Menu_3();
             }
-            statement.executeUpdate("delete from mainPackage.Doctor where firstName='" + str + "'");
+            statement.executeUpdate("delete from Doctors where firstName='" + str + "'");
             System.out.println("DBQueryDoctors::deleteOneDoctor(); -- " + str);
         } catch (SQLException e) {
             e.printStackTrace();
