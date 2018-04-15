@@ -1,5 +1,6 @@
 package mainPackage.dbQuerys;
 
+import mainPackage.CheckValidData;
 import mainPackage.Connections;
 import mainPackage.Doctor;
 import mainPackage.SwithMenu;
@@ -24,7 +25,7 @@ public class DBQueryDoctors {
                 String fName = rs.getString(2);
                 String lName = rs.getString(3);
                 String prof = rs.getString(4);
-                System.out.println("НОМЕР: " + d + " ФАМИЛИЯ: " + fName + " ИМЯ: " + lName + " СПЕЦИАЛИЗАЦИЯ: " + prof);
+                System.out.println("Номер: " + d + " фамилия: " + fName + " имя: " + lName + " специлиализация: " + prof);
                 Doctor doc = new Doctor(d, fName, lName, prof);
                 doctors.add(doc);
 //                System.out.println(doctors);
@@ -56,25 +57,39 @@ public class DBQueryDoctors {
     public static void addNewDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("\nВВЕДИТЕ ФАМИЛИЮ НОВОГО ДОКТОРА : ");
-            System.out.println("Для отмены введите - Отмена");
-            String str2 = bufferedReader.readLine();
-            if (str2.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
-            System.out.println("ВВЕДИТЕ ИМЯ НОВОГО ДОКТОРА : ");
-            String str3 = bufferedReader.readLine();
-            if (str3.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
-            System.out.println("ВВЕДИТЕ СПЕЦИАЛЬЗАЦИЮ НОВОГО ДОКТОРА : ");
+            System.out.println("\nВведите фамилию нового доктора : ");
+            System.out.println("Для отмены Введите - Отмена");
+            String str2;
+            do {
+                str2 = bufferedReader.readLine();
+                if (str2.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isName(str2)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(str2));
+
+            System.out.println("Введите имя нового доктора : ");
+            String str3;
+            do {
+                str3 = bufferedReader.readLine();
+                if (str3.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isName(str3)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(str3));
+
+            System.out.println("Введите специализацию нового доктора : ");
             String str4 = bufferedReader.readLine();
             if (str4.equals("Отмена")) {
                 SwithMenu.sW_Menu_2();
             }
             statement.executeUpdate("insert into Doctors (firstName, lastName, profession)" +
                     " values ('" + str2 + "','" + str3 + "', '" + str4 + "')");
-            System.out.println("DBQueryDoctors.addNewDoctor(); -- " + str2 + " " + str3 + " " + str4);
+//            System.out.println("DBQueryDoctors.addNewDoctor(); -- " + str2 + " " + str3 + " " + str4);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -87,23 +102,43 @@ public class DBQueryDoctors {
             Statement statement = connectTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             DBQueryDoctors.printDoctors(DBQueryDoctors.getAllDoctors(Connections.connectTo()));
-            System.out.println("\nВВЕДИТЕ ФАМИЛИЮ ДОКТОРА НА ИЗМЕНЕНИЕ ДАННЫХ");
-            System.out.println("Для отмены введите - Отмена");
-            String fNameForEdit = bufferedReader.readLine();
-            if (fNameForEdit.equals("Отмена")) {
-                SwithMenu.sW_Menu_4();
-            }
-            System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ");
-            String newFirstName = bufferedReader.readLine();
-            if (newFirstName.equals("Отмена")) {
-                SwithMenu.sW_Menu_4();
-            }
-            System.out.println("РЕДАКТИРОВАНИЕ ИМЕНИ ");
-            String newLastName = bufferedReader.readLine();
-            if (newLastName.equals("Отмена")) {
-                SwithMenu.sW_Menu_4();
-            }
-            System.out.println("РЕДАКТИРОВАНИЕ СПЕЦИЛИЗАЦИИ ");
+            System.out.println("\nВведите фамилию доктора на изменение данных");
+            System.out.println("Для отмены Введите - Отмена");
+            String fNameForEdit;
+            do {
+                fNameForEdit = bufferedReader.readLine();
+                if (fNameForEdit.equals("Отмена")) {
+                    SwithMenu.sW_Menu_4();
+                }
+                if (!CheckValidData.isName(fNameForEdit)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(fNameForEdit));
+
+            System.out.println("Редактирование фамилии ");
+            String newFirstName;
+            do {
+                newFirstName = bufferedReader.readLine();
+                if (newFirstName.equals("Отмена")) {
+                    SwithMenu.sW_Menu_4();
+                }
+                if (!CheckValidData.isName(newFirstName)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(newFirstName));
+
+            System.out.println("Редактирование имени ");
+            String newLastName;
+            do {
+                newLastName = bufferedReader.readLine();
+                if (newLastName.equals("Отмена")) {
+                    SwithMenu.sW_Menu_4();
+                }
+                if (!CheckValidData.isName(newLastName)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(newLastName));
+            System.out.println("Редактирование специализации ");
             String newSpecilization = bufferedReader.readLine();
             if (newSpecilization.equals("Отмена")) {
                 SwithMenu.sW_Menu_4();
@@ -120,14 +155,21 @@ public class DBQueryDoctors {
         try (Statement statement = connectTo.createStatement()) {
             Scanner scanner = new Scanner(System.in);
             DBQueryDoctors.printDoctors(DBQueryDoctors.getAllDoctors(Connections.connectTo()));
-            System.out.println("\nВВЕДИТЕ ФАМИЛИЮ ДОКТОРА КОТОРОГО УДАЛИТЬ ИЗ БАЗЫ: ");
+            System.out.println("\nВведите фамилию доктора которого удалить из базы: ");
             System.out.println("для отмены введите - Отмена");
-            String str = scanner.nextLine();
-            if (str.equals("Отмена")) {
-                SwithMenu.sW_Menu_3();
-            }
+            String str;
+            do {
+                str = scanner.nextLine();
+                if (str.equals("Отмена")) {
+                    SwithMenu.sW_Menu_3();
+                }
+                if (!CheckValidData.isName(str)) {
+                    System.out.println("Неверный формат");
+                }
+            }while (!CheckValidData.isName(str));
+
             statement.executeUpdate("delete from Doctors where firstName='" + str + "'");
-            System.out.println("DBQueryDoctors::deleteOneDoctor(); -- " + str);
+//            System.out.println("DBQueryDoctors::deleteOneDoctor(); -- " + str);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -29,7 +29,7 @@ public class DBQueryVisits {
                 int visitPatient = rs.getInt(3);
                 String visitSpecifical = rs.getString(4);
                 System.out.println("Номер визита: " + visitId + " Доктор: " + visitDoctor +
-                        " Пациент: " + visitPatient + " Описание: " + visitSpecifical);
+                        " Пациент: " + visitPatient + " описание: " + visitSpecifical);
                 Visit vis = new Visit(visitId, visitDoctor, visitPatient, visitSpecifical);
             }
         }
@@ -45,8 +45,10 @@ public class DBQueryVisits {
     public static List<Visit> getAllVisitsTableWithFirstAndLastName(Connection connectTo) throws SQLException {
         ArrayList<Visit> visits = new ArrayList<>();
         try (Statement statement = connectTo.createStatement()) {
-            String queryStr = MessageFormat.format("select {0}.visitId, {0}.visitDoctor, {0}.visitPatient, {0}.visitSpecifical, {1}.firstName, {2}.firstNamePatient, {0}.visitDate from {0} inner join {1} on {0}.visitDoctor = {1}.doctorId inner join {2} on {0}.visitPatient = {2}.patientId;", DBQueryVisits.tableName, DBQueryDoctors.tableName, DBQueryPatients.tableName);
-            System.out.println("DBQueryVisits::getAllVisitsTableWithFirstAndLastName(); -- queryStr:" + queryStr);
+            String queryStr = MessageFormat.format("select {0}.visitId, {0}.visitDoctor, {0}.visitPatient, {0}.visitSpecifical, {1}.firstName, {2}.firstNamePatient, "+
+                    "{0}.visitDate from {0} inner join {1} on {0}.visitDoctor = {1}.doctorId inner join {2} on {0}.visitPatient = "+
+                    "{2}.patientId;", DBQueryVisits.tableName, DBQueryDoctors.tableName, DBQueryPatients.tableName);
+//            System.out.println("DBQueryVisits::getAllVisitsTableWithFirstAndLastName(); -- queryStr:" + queryStr);
             ResultSet rs = statement.executeQuery(queryStr);
             while (rs.next()) {
                 int visitId = rs.getInt(1);
@@ -57,8 +59,8 @@ public class DBQueryVisits {
                 String firstNamePatient = rs.getString(6);
                 String dbSqlDate = rs.getString(7);
 //                Date dt = rs.getDate(6);
-                System.out.println("НОМЕР ПОСЕЩЕНИЯ: " + visitId + ", НОМЕР ДОКТОРА: " + visitDoctor + " НОМЕР ПАЦИЕНТА: " + visitPatient +
-                        ", ОПИСАНИЕ ПРИЕМА: " + spec + ", ФАМИЛИЯ ПАЦИЕНТА: " + firstNamePatient + ", ФАМИЛИЯ ДОКТОРА: " + doctorsfirstName + ", ДАТА ПРИЕМА: " + dbSqlDate);
+                System.out.println("Номер посещешия: " + visitId + ", номер  доктора: " + visitDoctor + " номер  пациента: " + visitPatient +
+                        ", описание приема: " + spec + ", фамилия пациента: " + firstNamePatient + ", фамилия доктора: " + doctorsfirstName + ", дата приема: " + dbSqlDate);
             }
         }
         return visits;
@@ -66,7 +68,7 @@ public class DBQueryVisits {
 
     public static void giveVisitsByOneDoctor(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
-            System.out.println("ВВЕДИТЕ ФАМИЛИЮ ДОКТОРА У КОТОРОГО ХОТИТЕ УЗНАТЬ ИНФОРМАЦИЮ О ПЕСЕЩЕНИЯХ : ");
+            System.out.println("Введите фамилию доктора у которого хотите узнать информацию о посещениях : ");
             int id_doc = DBQueryAdditionalQuery.giveDoctorByFirstName(connectTo);
             System.out.println(id_doc);
             ResultSet rs = statement.executeQuery("select Doctors.firstName, Patients.firstNamePatient,Visits.visitSpecifical from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on " +
@@ -75,7 +77,7 @@ public class DBQueryVisits {
                 String str1 = rs.getString(1);
                 String str2 = rs.getString(2);
                 String str3 = rs.getString(3);
-                System.out.println("ФАМИЛИЯ ДОКТОРА: " + str1 + " ФАМИЛИЯ ПАЦИЕНТА: " + str2 + " ОПИСАНИЕ ПРИЕМА: " + str3);
+                System.out.println("фамилия доктора: " + str1 + " фамилия пациента: " + str2 + " описание приема: " + str3);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +87,7 @@ public class DBQueryVisits {
     public static void giveVisitsByOnePatient(Connection connectTo) {
         try (Statement statement = connectTo.createStatement()) {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("ВВЕДИТЕ ФАМИИЮ ПАЦИЕНТА КОТОРЫЙ ПОСЕЩАЛ ВРАЧЕЙ : ");
+            System.out.println("Введите фамилию пациента который посещал врачей : ");
             int id_pat = DBQueryAdditionalQuery.givePatientByFirstName(connectTo);
             System.out.println(id_pat);
             ResultSet rs = statement.executeQuery("select Doctors.firstName, Patients.firstNamePatient, Visits.visitSpecifical from Visits inner join Doctors on Visits.visitDoctor = Doctors.doctorId inner join Patients on " +
@@ -94,7 +96,7 @@ public class DBQueryVisits {
                 String str1 = rs.getString(1);
                 String str2 = rs.getString(2);
                 String str3 = rs.getString(3);
-                System.out.println("ФАМИЛИЯ ПАЦИЕНТА: " + str2 + " ФАМИЛИЯ ДОКТОРА: " + str1 + " ОПИСАНИЕ ПРИЕМА: " + str3);
+                System.out.println("фамилия пациента: " + str2 + " фамилия доктора: " + str1 + " описание приема: " + str3);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,44 +111,75 @@ public class DBQueryVisits {
             PritnUserMenu.standartFormatDate();
             System.out.println("Укажите год приема: ");
             System.out.println("Для отмены введите - Отмена");
-            String year_visit = bufferedReader.readLine();
-            if (year_visit.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
+            String year_visit;
+            do {
+                year_visit = bufferedReader.readLine();
+                if (year_visit.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isYear(year_visit)) {
+                    System.out.println("Неверный формат повторите ввод(только числа)");
+                }
+            }while (!CheckValidData.isYear(year_visit));
             int year = Integer.parseInt(year_visit);
             System.out.println("Укажите месяц: ");
-            String scan = bufferedReader.readLine();
-            if (scan.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
-            int mounth_tmp = Times.nameMounth(scan);
+            String scan;
+            int mounth_tmp;
+            do {
+                scan = bufferedReader.readLine();
+                if (scan.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isMounth(scan)) {
+                    System.out.println("Неверный формат повторите ввод(название месяца с заглавной буквы)");
+                }
+                mounth_tmp = Times.nameMounth(scan);
+            }while (!CheckValidData.isMounth(scan));
             System.out.println("День приема: ");
-            String day_visit = bufferedReader.readLine();
-            if (day_visit.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
+            String day_visit;
+            do {
+                 day_visit = bufferedReader.readLine();
+                if (day_visit.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isDay(day_visit)) {
+                    System.out.println("Неверный формат повторите ввод(число от 1 до 31");
+                }
+            }while (!CheckValidData.isDay(day_visit));
             int dayOfMonth = Integer.parseInt(day_visit);
             System.out.println("Час приема: ");
-            String hour_visit = bufferedReader.readLine();
-            if (hour_visit.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
+            String hour_visit;
+            do {
+                hour_visit = bufferedReader.readLine();
+                if (hour_visit.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isHour(hour_visit)) {
+                    System.out.println("Неверный формат (число от 0 до 23)");
+                }
+            }while (!CheckValidData.isHour(hour_visit));
             int hourVisit = Integer.parseInt(hour_visit);
             System.out.println("Минуты: ");
-            String min_visit = bufferedReader.readLine();
-            if (min_visit.equals("Отмена")) {
-                SwithMenu.sW_Menu_2();
-            }
+            String min_visit;
+            do {
+                min_visit = bufferedReader.readLine();
+                if (min_visit.equals("Отмена")) {
+                    SwithMenu.sW_Menu_2();
+                }
+                if (!CheckValidData.isMinut(min_visit)) {
+                    System.out.println("Неверный формат (число от 0 до 59)");
+                }
+            }while (!CheckValidData.isMinut(min_visit));
             int minuteVisit = Integer.parseInt(min_visit);
             Date dateString = new Date(year, mounth_tmp, dayOfMonth, hourVisit, minuteVisit);
             System.out.println(dateString);
             DBQueryDoctors.printDoctors(DBQueryDoctors.getAllDoctors(Connections.connectTo()));
-            System.out.println("ФАМИЛИЯ ДОКТОРА ОСМОТРЕВШИЙ ПАЦИЕНТА: ");
+            System.out.println("фамилия доктора осмотревший пациента: ");
             int visitDoctor_temp = DBQueryAdditionalQuery.giveDoctorByFirstName(connectTo);
             DBQueryPatients.printPatients(DBQueryPatients.getAllPatients(Connections.connectTo()));
-            System.out.println("ФАМИЛИЯ ОСМАТРИВАЕМОГО ПАЦИЕНТА: ");
+            System.out.println("фамилия осматриваемого пациента: ");
             int visitPatient_temp = DBQueryAdditionalQuery.givePatientByFirstName(connectTo);
-            System.out.println("ОПИСАНИЕ ВИЗИТА: ");
+            System.out.println("описание визита: ");
             String visitSpecifical = bufferedReader.readLine();
             if (visitSpecifical.equals("Отмена")) {
                 SwithMenu.sW_Menu_2();
@@ -158,8 +191,6 @@ public class DBQueryVisits {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public static void deleteOneVisit(Connection connectTo) throws IOException {
@@ -167,15 +198,21 @@ public class DBQueryVisits {
             Scanner scanner = new Scanner(System.in);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             DBQueryVisits.printAllVisitsTable(DBQueryVisits.getAllVisitsTableWithFirstAndLastName(Connections.connectTo()));
-            System.out.println("\nВВЕДИТЕ НОМЕР ВИЗИТА КОТОРЫЙ ХОТИТЕ УДАЛИТЬ ИЗ БАЗЫ: ");
+            System.out.println("\nВведите Номер визита который хотите удалить из базы: ");
             System.out.println("Для отмена введите - Отмена");
-            String str = bufferedReader.readLine();
-            if (str.equals("Отмена")) {
-                SwithMenu.sW_Menu_3();
-            }
+            String str;
+            do {
+                str = bufferedReader.readLine();
+                if (str.equals("Отмена")) {
+                    SwithMenu.sW_Menu_3();
+                }
+                if (!CheckValidData.isNumber_1_4(str)) {
+                    System.out.println("Неверный формат повторите(только числа)");
+                }
+            }while (!CheckValidData.isNumber_1_4(str));
             int temp = Integer.parseInt(str);
             statement.executeUpdate("delete from Visits where visitId='" + temp + "'");
-            System.out.println("DBQueryDoctors::deleteOneVisit(); -- " + temp);
+//            System.out.println("DBQueryDoctors::deleteOneVisit(); -- " + temp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,20 +223,26 @@ public class DBQueryVisits {
             Statement statement = connectTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             printAllVisitsTable(getAllVisitsTableWithFirstAndLastName(Connections.connectTo()));
-            System.out.println("\nВВЕДИТЕ НОМЕР ВИЗИТА ДЛЯ РЕДАКТИРОВАНИЯ");
+            System.out.println("\nВведите номер визита для редактирования");
             System.out.println("Для отмены введите - Отмена");
-            String fNameForEdit = bufferedReader.readLine();
-            if (fNameForEdit.equals("Отмена")) {
-                SwithMenu.sW_Menu_4();
-            }
+            String fNameForEdit;
+            do {
+                fNameForEdit = bufferedReader.readLine();
+                if (fNameForEdit.equals("Отмена")) {
+                    SwithMenu.sW_Menu_4();
+                }
+                if (!CheckValidData.isNumber_1_4(fNameForEdit)) {
+                    System.out.println("Неверный формат повторите(только числа)");
+                }
+            }while (!CheckValidData.isNumber_1_4(fNameForEdit));
             int visitId = Integer.parseInt(fNameForEdit);
             DBQueryDoctors.printDoctors(DBQueryDoctors.getAllDoctors(Connections.connectTo()));
-            System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ДОКТОРА КОТОРЫЙ ПРОИЗВЕЛ ОСМОТР");
+            System.out.println("Редактирование фамилии доктора который произвел осмотр");
             int visitDoctor = DBQueryAdditionalQuery.giveDoctorByFirstName(connectTo);
             DBQueryPatients.printPatients(DBQueryPatients.getAllPatients(Connections.connectTo()));
-            System.out.println("РЕДАКТИРОВАНИЕ ФАМИЛИИ ОСМАТРИВАЕМОГО ПАЦИЕНТА ");
+            System.out.println("Редактирование фамилии осматриваемого пациента ");
             int visitPatient = DBQueryAdditionalQuery.givePatientByFirstName(connectTo);
-            System.out.println("РЕДАКТИРОВАНИЕ ОПИСАНИЯ ВИЗИТА ");
+            System.out.println("Редактирование описания визита ");
             String newAge = bufferedReader.readLine();
             if (newAge.equals("Отмена")) {
                 SwithMenu.sW_Menu_4();
@@ -217,7 +260,7 @@ public class DBQueryVisits {
     public static void editDoctorInVisit(Connection connectTo) {
         try {
             Statement statement = connectTo.createStatement();
-            System.out.println("ВВЕДИТЕ ФАМИЛИЮ ДОКТОРА ");
+            System.out.println("Введите фамилию доктора ");
             int id_doc_temp = DBQueryAdditionalQuery.giveDoctorByFirstName(connectTo);
             statement.executeUpdate("update Visits set visitDoctor = 437 where visitDoctor=" + id_doc_temp + "");
         } catch (SQLException e) {

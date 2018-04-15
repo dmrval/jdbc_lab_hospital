@@ -1,5 +1,6 @@
 package mainPackage.dbQuerys;
 
+import mainPackage.CheckValidData;
 import mainPackage.SwithMenu;
 
 import java.io.BufferedReader;
@@ -17,10 +18,16 @@ public class DBQueryAdditionalQuery {
         try {
             Statement statement = connectTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            String strTemp = bufferedReader.readLine();
-            if (strTemp.equals("Отмена")) {
-                SwithMenu.sWMain();
-            }
+            String strTemp;
+            do {
+                strTemp = bufferedReader.readLine();
+                if (strTemp.equals("Отмена")) {
+                    SwithMenu.sWMain();
+                }
+                if (!CheckValidData.isName(strTemp)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(strTemp));
             ResultSet rs = statement.executeQuery("select Doctors.doctorId from Doctors where Doctors.firstName = '" + strTemp + "'");
             while (rs.next()) {
                 temp = rs.getInt(1);
@@ -38,10 +45,16 @@ public class DBQueryAdditionalQuery {
         try {
             Statement statement = connectTo.createStatement();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            String strTemp = bufferedReader.readLine();
-            if (strTemp.equals("Отмена")) {
-                SwithMenu.sWMain();
-            }
+            String strTemp;
+            do {
+                strTemp = bufferedReader.readLine();
+                if (strTemp.equals("Отмена")) {
+                    SwithMenu.sWMain();
+                }
+                if (!CheckValidData.isName(strTemp)) {
+                    System.out.println("Неверный формат повторите");
+                }
+            }while (!CheckValidData.isName(strTemp));
             ResultSet rs = statement.executeQuery("select Patients.patientId from Patients where Patients.firstNamePatient = '" + strTemp + "'");
             while (rs.next()) {
                 temp = rs.getInt(1);

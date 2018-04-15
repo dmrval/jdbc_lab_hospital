@@ -1,7 +1,11 @@
 package mainPackage;
 
+import javax.annotation.processing.SupportedSourceVersion;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  *
@@ -21,5 +25,18 @@ public class MainClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//        String str = null;
+//        do {
+//            try {
+//                str = bufferedReader.readLine();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            if (CheckValidData.isNumber_1_4(str)) {
+//                System.out.println("Подходит ");
+//            }
+//            else System.out.println("НЕТ");
+//        }while (0==0);
     }
 }
