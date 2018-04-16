@@ -3,6 +3,8 @@ package mainPackage.dbQuerys;
 import mainPackage.CheckValidData;
 import mainPackage.SwithMenu;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,6 +38,12 @@ public class DBQueryAdditionalQuery {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return temp;
     }
@@ -62,6 +70,12 @@ public class DBQueryAdditionalQuery {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return temp;

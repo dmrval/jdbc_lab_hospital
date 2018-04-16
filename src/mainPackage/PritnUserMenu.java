@@ -8,7 +8,8 @@ public class PritnUserMenu {
         stringBuilder.append("2 - Добавить информацию в базу\n");
         stringBuilder.append("3 - Удалить информацию из базы\n");
         stringBuilder.append("4 - Изменить информацию в базы\n");
-        stringBuilder.append("5 - Выход\n");
+        stringBuilder.append("5 - Экспортировать данные в XML\n");
+        stringBuilder.append("6 - Выход\n");
         System.out.println(stringBuilder);
     }
 
@@ -60,6 +61,16 @@ public class PritnUserMenu {
         stringBuilder.append("3 - День (Пример ДД)\n");
         stringBuilder.append("4 - Час посещения (Пример 21)\n");
         stringBuilder.append("5 - Минуты (Пример 45)\n");
+        System.out.println(stringBuilder);
+    }
+
+    public static void menu_5() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Какую информацию экспортировать в файл XML: \n");
+        stringBuilder.append("1 - Пациентов в XML\n");
+        stringBuilder.append("2 - Врачей в XML\n");
+        stringBuilder.append("3 - Визитов в XML\n");
+        stringBuilder.append("4 - Вернуться назад в главное меню\n");
         System.out.println(stringBuilder);
     }
 }

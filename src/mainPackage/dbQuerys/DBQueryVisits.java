@@ -2,6 +2,8 @@ package mainPackage.dbQuerys;
 
 import mainPackage.*;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -190,6 +192,12 @@ public class DBQueryVisits {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -214,6 +222,12 @@ public class DBQueryVisits {
             statement.executeUpdate("delete from Visits where visitId='" + temp + "'");
 //            System.out.println("DBQueryDoctors::deleteOneVisit(); -- " + temp);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -253,6 +267,12 @@ public class DBQueryVisits {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -1,10 +1,16 @@
 package mainPackage;
 
 import javax.annotation.processing.SupportedSourceVersion;
+import javax.sql.rowset.WebRowSet;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 /**
@@ -15,8 +21,7 @@ import java.util.Scanner;
  * */
 
 public class MainClass {
-
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, TransformerException, ParserConfigurationException {
         try {
             Class.forName("org.sqlite.JDBC");
             SwithMenu.sWMain();
@@ -25,18 +30,21 @@ public class MainClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-//        String str = null;
-//        do {
-//            try {
-//                str = bufferedReader.readLine();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            if (CheckValidData.isNumber_1_4(str)) {
-//                System.out.println("Подходит ");
-//            }
-//            else System.out.println("НЕТ");
-//        }while (0==0);
+
+        /* Check Valid Data Code
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        String str = null;
+        do {
+            try {
+                str = bufferedReader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (CheckValidData.isNumber_1_4(str)) {
+                System.out.println("Yes");
+            }
+            else System.out.println("No");
+        }while (0==0);
+        */
     }
 }

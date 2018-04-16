@@ -5,6 +5,8 @@ import mainPackage.Connections;
 import mainPackage.Patient;
 import mainPackage.SwithMenu;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -88,6 +90,12 @@ public class DBQueryPatients {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -147,6 +155,12 @@ public class DBQueryPatients {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -169,6 +183,12 @@ public class DBQueryPatients {
             statement.executeUpdate("delete from Patients where firstNamePatient='" + str + "'");
 //            System.out.println("mainPackage.dbQuerys.DBQueryDoctors::deleteOnePatient(); -- " + str);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

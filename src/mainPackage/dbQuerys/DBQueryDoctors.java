@@ -5,6 +5,8 @@ import mainPackage.Connections;
 import mainPackage.Doctor;
 import mainPackage.SwithMenu;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,8 +30,6 @@ public class DBQueryDoctors {
                 System.out.println("Номер: " + d + " фамилия: " + fName + " имя: " + lName + " специлиализация: " + prof);
                 Doctor doc = new Doctor(d, fName, lName, prof);
                 doctors.add(doc);
-//                System.out.println(doctors);
-//                System.out.println();
             }
         }
         return doctors;
@@ -94,6 +94,12 @@ public class DBQueryDoctors {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -148,6 +154,12 @@ public class DBQueryDoctors {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -171,6 +183,12 @@ public class DBQueryDoctors {
             statement.executeUpdate("delete from Doctors where firstName='" + str + "'");
 //            System.out.println("DBQueryDoctors::deleteOneDoctor(); -- " + str);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -37,6 +37,5 @@ public class CheckValidData {
     public static boolean isNumber_1_4(String day) {
         return day != null && day.matches("[0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9]");
     }
-//    (34[5-9]) | (3[5-9][0-9]) | (4[0-6][0-9]) | (47[0-6])
 
 }
