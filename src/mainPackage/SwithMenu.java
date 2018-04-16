@@ -131,15 +131,15 @@ public class SwithMenu {
         int i = scanner.nextInt();
         switch (i) {
             case 1:
-                ExportToXML.ExportToXMLPatients();
+                ExportToXML.ExportToXML("Patients", "Patient");
                 sW_Menu_5();
                 break;
             case 2:
-                ExportToXML.ExportToXMLDoctors();
+                ExportToXML.ExportToXML("Doctors","Doctor");
                 sW_Menu_5();
                 break;
             case 3:
-                ExportToXML.ExportToXMLVisits();
+                ExportToXML.ExportToXML("Visits", "Visit");
                 sW_Menu_5();
                 break;
             case 4:

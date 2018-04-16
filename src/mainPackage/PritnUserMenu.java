@@ -5,9 +5,9 @@ public class PritnUserMenu {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Главное меню: \n");
         stringBuilder.append("1 - Получить информацию из базы\n");
-        stringBuilder.append("2 - Добавить информацию в базу\n");
-        stringBuilder.append("3 - Удалить информацию из базы\n");
-        stringBuilder.append("4 - Изменить информацию в базы\n");
+        stringBuilder.append("2 - Добавить информацию \n");
+        stringBuilder.append("3 - Удалить информацию \n");
+        stringBuilder.append("4 - Изменить информацию \n");
         stringBuilder.append("5 - Экспортировать данные в XML\n");
         stringBuilder.append("6 - Выход\n");
         System.out.println(stringBuilder);
