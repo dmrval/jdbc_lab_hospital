@@ -1,0 +1,37 @@
+<Visits>
+    <Visit>
+        <visitId>17</visitId>
+        <visitDate>Wed Jul 25 00:00:00 GST 3917</visitDate>
+        <visitDoctor>437</visitDoctor>
+        <visitPatient>3</visitPatient>
+        <visitSpecifical>Грыжа</visitSpecifical>
+    </Visit>
+    <Visit>
+        <visitId>19</visitId>
+        <visitDate>Wed Apr 10 15:45:00 GST 3918</visitDate>
+        <visitDoctor>436</visitDoctor>
+        <visitPatient>3</visitPatient>
+        <visitSpecifical>Разрыв грудной мышцы</visitSpecifical>
+    </Visit>
+    <Visit>
+        <visitId>20</visitId>
+        <visitDate>Sat Apr 10 16:45:00 GST 3915</visitDate>
+        <visitDoctor>441</visitDoctor>
+        <visitPatient>4</visitPatient>
+        <visitSpecifical>Опендикс</visitSpecifical>
+    </Visit>
+    <Visit>
+        <visitId>24</visitId>
+        <visitDate>Mon Mar 30 21:32:00 GMT+04:00 5012</visitDate>
+        <visitDoctor>0</visitDoctor>
+        <visitPatient>8</visitPatient>
+        <visitSpecifical>123</visitSpecifical>
+    </Visit>
+    <Visit>
+        <visitId>25</visitId>
+        <visitDate>Sun May 05 15:15:00 GST 3918</visitDate>
+        <visitDoctor>436</visitDoctor>
+        <visitPatient>6</visitPatient>
+        <visitSpecifical>Нехуй было делать</visitSpecifical>
+    </Visit>
+</Visits>
